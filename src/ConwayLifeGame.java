@@ -100,27 +100,33 @@ public class ConwayLifeGame {
 	
 	public static void main(String[] ar) {
 		//set up the test cases
-		matrix[0][0] = 1;
-		matrix[1][0] = 1;
-		matrix[2][0] = 1;
-		matrix[3][0] = 1;
-		matrix[1][2] = 1;
-		matrix[199][199] = 1;
-		matrix[198][198] = 1;
-		matrix[198][199] = 1;
-		matrix[199][198] = 1;
+		
 		
 		ConwayLifeGame clg = new ConwayLifeGame();
-		
+		matrix[5][5] = 1;
+		matrix[6][5] = 1;
+		matrix[7][5] = 1;
+		matrix[5][6] = 1;
+		matrix[6][6] = 1;
+		matrix[7][6] = 1;
+		System.out.println("Outout for the next 100 state: ");
 		for(int col = 0 ; col < WIDTH ; col++) {
 			for(int row = 0 ; row < HEIGHT ; row++) {
 				int count = clg.countNeibour(col,row);
 				if(count!=0) {
+					//generate the next generation and stored into the nextGeneration array
 					nextGeneration[col][row] = clg.nextGeneration(count, col, row);
 				}
 			}
 		}
-		
+		System.out.println("Next Generation: ");
+		for(int col = 0 ; col < WIDTH ; col++) {
+			for(int row = 0 ; row < HEIGHT ; row++) {
+				if(nextGeneration[col][row] == 1) {
+					System.out.println("["+col+","+row+"]");
+				}
+			}
+		}
 		
 	}
 }

@@ -97,5 +97,30 @@ public class ConwayLifeGame {
 			return matrix[col][row];
 		}
 	}
-
+	
+	public static void main(String[] ar) {
+		//set up the test cases
+		matrix[0][0] = 1;
+		matrix[1][0] = 1;
+		matrix[2][0] = 1;
+		matrix[3][0] = 1;
+		matrix[1][2] = 1;
+		matrix[199][199] = 1;
+		matrix[198][198] = 1;
+		matrix[198][199] = 1;
+		matrix[199][198] = 1;
+		
+		ConwayLifeGame clg = new ConwayLifeGame();
+		
+		for(int col = 0 ; col < WIDTH ; col++) {
+			for(int row = 0 ; row < HEIGHT ; row++) {
+				int count = clg.countNeibour(col,row);
+				if(count!=0) {
+					nextGeneration[col][row] = clg.nextGeneration(count, col, row);
+				}
+			}
+		}
+		
+		
+	}
 }

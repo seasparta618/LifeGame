@@ -1,3 +1,4 @@
+import java.util.Scanner;
 
 /**
  * 
@@ -98,17 +99,33 @@ public class ConwayLifeGame {
 		}
 	}
 	
+	/**
+	 * 
+	 * @param numbers use numbers to initialize the status for the cell
+	 * every two numbers is a part to present the colum and row for the living cell
+	 */
+	private void initializeMatrix(int [] numbers) {
+		for(int index = 0 ; index < numbers.length ; index += 2) {
+			matrix[numbers[index]][numbers[index+1]] = 1;
+		}
+	}
+	
 	public static void main(String[] ar) {
-		//set up the test cases
-		
-		
+		System.out.println("input: ");
+		//scan for the input
+		Scanner sc = new Scanner(System.in);
+		String input = sc.nextLine();
+		// use comma to split all the input numbers
+		String[] args = input.split(",");
+		int[] numbers = new int[args.length];
+		int index = 0;
+		for(String arg : args) {
+			//just get the digit from the substring
+			numbers[index] = Integer.parseInt(arg.replaceAll("\\D+", ""));
+			index++;
+		}
 		ConwayLifeGame clg = new ConwayLifeGame();
-		matrix[5][5] = 1;
-		matrix[6][5] = 1;
-		matrix[7][5] = 1;
-		matrix[5][6] = 1;
-		matrix[6][6] = 1;
-		matrix[7][6] = 1;
+		clg.initializeMatrix(numbers);
 		System.out.println("Outout for the next 100 state: ");
 		for(int col = 0 ; col < WIDTH ; col++) {
 			for(int row = 0 ; row < HEIGHT ; row++) {

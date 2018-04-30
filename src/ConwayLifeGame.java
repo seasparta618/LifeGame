@@ -89,61 +89,69 @@ public class ConwayLifeGame {
 		if (count < 2 || count > 3) {
 			return 0;
 		}
-		//three around, reproduce
+		// three around, reproduce
 		else if (count == 3) {
 			return 1;
 		}
-		//directly return the status for the cell, no change for the current status
+		// directly return the status for the cell, no change for the current status
 		else {
 			return matrix[col][row];
 		}
 	}
-	
+
 	/**
 	 * 
-	 * @param numbers use numbers to initialize the status for the cell
-	 * every two numbers is a part to present the colum and row for the living cell
+	 * @param numbers
+	 *            use numbers to initialize the status for the cell every two
+	 *            numbers is a part to present the colum and row for the living cell
 	 */
-	private void initializeMatrix(int [] numbers) {
-		for(int index = 0 ; index < numbers.length ; index += 2) {
-			matrix[numbers[index]][numbers[index+1]] = 1;
+	private void initializeMatrix(int[] numbers) {
+		for (int index = 0; index < numbers.length; index += 2) {
+			matrix[numbers[index]][numbers[index + 1]] = 1;
 		}
 	}
-	
+
 	public static void main(String[] ar) {
 		System.out.println("input: ");
-		//scan for the input
+		// scan for the input
 		Scanner sc = new Scanner(System.in);
 		String input = sc.nextLine();
 		// use comma to split all the input numbers
 		String[] args = input.split(",");
 		int[] numbers = new int[args.length];
 		int index = 0;
-		for(String arg : args) {
-			//just get the digit from the substring
+		for (String arg : args) {
+			// just get the digit from the substring
 			numbers[index] = Integer.parseInt(arg.replaceAll("\\D+", ""));
 			index++;
 		}
 		ConwayLifeGame clg = new ConwayLifeGame();
 		clg.initializeMatrix(numbers);
+
 		System.out.println("Outout for the next 100 state: ");
-		for(int col = 0 ; col < WIDTH ; col++) {
-			for(int row = 0 ; row < HEIGHT ; row++) {
-				int count = clg.countNeibour(col,row);
-				if(count!=0) {
-					//generate the next generation and stored into the nextGeneration array
-					nextGeneration[col][row] = clg.nextGeneration(count, col, row);
+		for (int round = 1; round < 100; round++) {
+			for (int col = 0; col < WIDTH; col++) {
+				for (int row = 0; row < HEIGHT; row++) {
+					int count = clg.countNeibour(col, row);
+					if (count != 0) {
+						// generate the next generation and stored into the nextGeneration array
+						nextGeneration[col][row] = clg.nextGeneration(count, col, row);
+					}
 				}
 			}
-		}
-		System.out.println("Next Generation: ");
-		for(int col = 0 ; col < WIDTH ; col++) {
-			for(int row = 0 ; row < HEIGHT ; row++) {
-				if(nextGeneration[col][row] == 1) {
-					System.out.println("["+col+","+row+"]");
+			StringBuffer result = new StringBuffer("");
+			result.append("[");
+			System.out.print(round+": ");
+			for (int col = 0; col < WIDTH; col++) {
+				for (int row = 0; row < HEIGHT; row++) {
+					if (nextGeneration[col][row] == 1) {
+						result.append("[" + col + "," + row + "]");
+					}
 				}
 			}
+			result.append("]");
+			System.out.println(result);
 		}
-		
+
 	}
 }

@@ -75,4 +75,27 @@ public class ConwayLifeGame {
 		return count;
 	}
 
+	/**
+	 * 
+	 * @param count
+	 *            use count to decide whether the cell is died or living or produced
+	 * @param col
+	 * @param row
+	 * @return
+	 */
+	private int nextGeneration(int count, int col, int row) {
+		// less than 2, under population, more than 3, over population
+		if (count < 2 || count > 3) {
+			return 0;
+		}
+		//three around, reproduce
+		else if (count == 3) {
+			return 1;
+		}
+		//directly return the status for the cell, no change for the current status
+		else {
+			return matrix[col][row];
+		}
+	}
+
 }

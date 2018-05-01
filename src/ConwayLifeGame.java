@@ -140,13 +140,17 @@ public class ConwayLifeGame {
 					}
 				}
 			}
+			//use string buffer to define the string, as the string will be changed later
 			StringBuffer result = new StringBuffer("");
 			result.append("[");
 			System.out.print(round+": ");
 			for (int col = 0; col < WIDTH; col++) {
 				for (int row = 0; row < HEIGHT; row++) {
+					//append the result into the the string, generate the output string
+					matrix[col][row] = nextGeneration[col][row];
 					if (nextGeneration[col][row] == 1) {
 						result.append("[" + col + "," + row + "]");
+						nextGeneration[col][row] = 0;
 					}
 				}
 			}

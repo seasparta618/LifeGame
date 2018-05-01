@@ -129,6 +129,7 @@ public class ConwayLifeGame {
 		clg.initializeMatrix(numbers);
 
 		System.out.println("Outout for the next 100 state: ");
+		//loop for a hundred rounds
 		for (int round = 1; round < 100; round++) {
 			for (int col = 0; col < WIDTH; col++) {
 				for (int row = 0; row < HEIGHT; row++) {
